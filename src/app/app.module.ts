@@ -10,7 +10,6 @@ import { LoginComponent} from './login/login.component';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import { UserService} from './user.service';
 import {AuthGuard} from './auth.guard';
 import { LoginAuthService} from './login-auth.service';
 import { from } from 'rxjs';
@@ -18,7 +17,7 @@ import { importExpr } from '@angular/compiler/src/output/output_ast';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 
 const appRoutes: Routes = []
- 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +35,6 @@ const appRoutes: Routes = []
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    UserService,
     AuthGuard,
     LoginAuthService
   ],

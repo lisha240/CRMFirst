@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import{Component, OnInit}from '@angular/core';
 
-import { UserService } from '../user.service';
-import { LoginAuthService} from '../login-auth.service';
+import {UserService} from '../service/user.service';
+import {LoginAuthService}from '../login-auth.service';
+import {Router}from "@angular/router";
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+selector: 'app-signup',
+templateUrl: './signup.component.html',
+styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
- public user: any ={ };
+public user: any = { };
+errorMessage: string;
 
 
-  constructor(private userService: UserService, private authService:LoginAuthService) {
+constructor(private router: Router, private userService: UserService, private authService:LoginAuthService) {
     this.authService.isLoggedIn();
    }
 
@@ -22,13 +24,16 @@ export class SignupComponent implements OnInit {
   saveUser(user: any, userForm: any){
     user.enabled = true;
     this.userService.saveUser(user).
-      subscribe(( response) =>
-        {
-          if(response){
-            console.log(response);
-            userForm.reset();
-        }
-     })
+subscribe(
+        data => {
+          if (data.status === 200) {
+            alert('User Created successfully.');
+          } else {
+            alert('There is an error creating... please try again !!!');
+          }
+          this.router.navigate(['login']);
+        });
+
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginAuthService} from '../login-auth.service';
-import { UserService } from '../user.service';
+import {UserService} from '../service/user.service';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class AdmindashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getAllUsers(this.loginuser.token)
-     .subscribe(users => 
+     .subscribe(users =>
       {
         this.users=users;
       })
